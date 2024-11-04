@@ -34,6 +34,7 @@ function trouve_majeur() {
     const result = users.filter(user => user.age >= age_majeur);
     // Affiche le résultat sous forme de chaîne JSON
     displayResult(JSON.stringify(result));
+    return result;
 }
 
 // Fonction pour ajouter une propriété 'selected' aux utilisateurs majeurs
@@ -42,18 +43,19 @@ function append_crit_majeurs() {
     const updatedUsers = users.map(user => ({...user, selected: user.age >= 18 ? 'yes' : 'no'}));
     // Affiche le tableau mis à jour sous forme de chaîne JSON
     displayResult(JSON.stringify(updatedUsers));
+    return updatedUsers;
 }
 
 // Fonction pour compter et afficher le nombre total de publications de tous les utilisateurs
 function nbr_post() {
     let result = 0; // Initialisation du compteur de publications
-  
-    // Vérifie si 'users' est un tableau non vide
-    if (Array.isArray(users) && users.length > 0) {
+    let users2= trouve_majeur();
+    // Vérifie si 'users' est un tableaus non vide
+    if (Array.isArray(users2) && users2.length > 0) {
         // Parcourt le tableau et additionne le nombre de publications de chaque utilisateur
-        for (let i = 0; i < users.length; i++) {
-            result += users[i].nbPosts;
-        }
+        for (let i = 0; i < users2.length; i++) {
+            result += users2[i].nbPosts;
+        }   
         // Affiche le total des publications sous forme de chaîne
         displayResult(result.toString());
     }
